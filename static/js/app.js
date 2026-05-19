@@ -712,12 +712,12 @@ class CVSEApp {
         const index = Number.isNaN(indexInput) ? 1 : Math.max(1, indexInput);
         document.getElementById('previewIndex').value = index;
         const preview = document.getElementById('rankingPreview');
-        const totalDuration = 90; // 秒
+        const totalDuration = 180; // 秒
 
         // 确认对话框
         const rankNames = { domestic: '国产榜', sv: 'SV刊', utau: 'UTAU刊' };
         const rankName = rankNames[rank] || rank.toUpperCase();
-        if (!confirm(`确定要重新计算 ${rankName} 第 ${index} 期排行榜吗？\n\n计算过程可能需要约 ${totalDuration} 秒，请耐心等待。`)) {
+        if (!confirm(`确定要重新计算 ${rankName}第 ${index} 期排行榜吗？请先确定“预览”中排行榜数据已经过时，再重新计算\n\n计算过程可能需要约 ${totalDuration} 秒，请耐心等待。`)) {
             return;
         }
 
@@ -734,14 +734,14 @@ class CVSEApp {
         timeEl.textContent = '0';
         overlay.classList.add('open');
 
-        // 启动动画计时器：90 秒内从 0% 走到 95%
+        // 启动动画计时器：90 秒内从 0% 走到 99%
         let elapsed = 0;
         const startTime = Date.now();
 
         const timer = setInterval(() => {
             elapsed = (Date.now() - startTime) / 1000;
             if (elapsed > totalDuration) elapsed = totalDuration;
-            const percent = Math.min(95, (elapsed / totalDuration) * 95);
+            const percent = Math.min(99, (elapsed / totalDuration) * 99);
             bar.style.width = percent + '%';
             percentEl.textContent = Math.round(percent);
             timeEl.textContent = Math.round(elapsed);
