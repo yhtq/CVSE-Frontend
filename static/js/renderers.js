@@ -226,7 +226,9 @@ export function createPreviewCard(entry) {
                         <span>⭐ ${Number(entry.favorite || 0).toLocaleString()}</span>
                         <span>📤 ${Number(entry.share || 0).toLocaleString()}</span>
                     </div>
-                    ${entry.isNew ? '<span class="tag tag-rank-utau" style="margin-top: 0.5rem; display: inline-block;">新上榜</span>' : ''}
+                    ${entry.isNew ? '<span class="tag tag-rank-utau" style="margin-top: 0.5rem; display: inline-block;">新曲</span>' : ''}
+                    ${entry.onMain ? '<span class="tag tag-rank-domestic" style="margin-top: 0.5rem; display: inline-block;">主榜</span>' : ''}
+                    ${entry.newlyOnMain ? '<span class="tag tag-rank-sv" style="margin-top: 0.5rem; display: inline-block;">十周内新上榜</span>' : ''}
                 </div>
             </div>
             <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--gray-200);">

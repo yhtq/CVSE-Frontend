@@ -29,6 +29,7 @@ from rpc_tools.api_client import (
     RPCTime,
     bv_to_index,
     capnp_to_Rank,
+    rank_position_main,
 )
 
 app = Flask(__name__)
@@ -532,6 +533,7 @@ async def get_ranking_preview_async(
     formatted_entries = []
     for entry in entries:
         video_info = video_info_map.get(entry.bvid, {})
+        onMain = entry.rankPosition == rank_position_main
         formatted_entries.append(
             {
                 "rank": entry.rank,
@@ -547,6 +549,8 @@ async def get_ranking_preview_async(
                 "share": entry.share,
                 "totalScore": entry.totalScore,
                 "isNew": entry.isNew,
+                "onMain": onMain,
+                "newlyOnMain": onMain and entry.onMainCountInTenWeeks == 1.
             }
         )
 
